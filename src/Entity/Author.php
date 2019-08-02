@@ -29,13 +29,18 @@ class Author
     private $age;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Book", mappedBy="author")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Book", mappedBy="authors")
      */
     private $books;
 
     public function __construct()
     {
         $this->books = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 
     public function getId(): ?int

@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 include_once $this->targetDirs[3].'/vendor/symfony/console/Command/Command.php';
 include_once $this->targetDirs[3].'/src/Command/BookListCommand.php';
 
-$this->privates['App\\Command\\BookListCommand'] = $instance = new \App\Command\BookListCommand();
+$this->privates['App\\Command\\BookListCommand'] = $instance = new \App\Command\BookListCommand(($this->services['doctrine.orm.default_entity_manager'] ?? $this->load('getDoctrine_Orm_DefaultEntityManagerService.php')));
 
 $instance->setName('book:list');
 

@@ -39,18 +39,18 @@ class Book
     private $annotation;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $relation;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Author", inversedBy="books")
      */
-    private $author;
+    private $authors;
 
     public function __construct()
     {
-        $this->author = new ArrayCollection();
+        $this->authors = new ArrayCollection();
+    }
+    
+    public function __toString()
+    {
+        return $this->name;
     }
 
     public function getId(): ?int
@@ -106,30 +106,18 @@ class Book
         return $this;
     }
 
-    public function getRelation(): ?string
-    {
-        return $this->relation;
-    }
-
-    public function setRelation(string $relation): self
-    {
-        $this->relation = $relation;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Author[]
      */
-    public function getAuthor(): Collection
+    public function getAuthors(): Collection
     {
-        return $this->author;
+        return $this->authors;
     }
 
     public function addAuthor(Author $author): self
     {
-        if (!$this->author->contains($author)) {
-            $this->author[] = $author;
+        if (!$this->authors->contains($author)) {
+            $this->authors[] = $author;
         }
 
         return $this;
@@ -137,8 +125,8 @@ class Book
 
     public function removeAuthor(Author $author): self
     {
-        if ($this->author->contains($author)) {
-            $this->author->removeElement($author);
+        if ($this->authors->contains($author)) {
+            $this->authors->removeElement($author);
         }
 
         return $this;

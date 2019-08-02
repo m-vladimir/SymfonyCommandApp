@@ -14,37 +14,46 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class AuthorRepository extends ServiceEntityRepository
 {
+    private $authorManager;
+
     public function __construct(RegistryInterface $registry)
     {
+        $this->authorManager = $registry->getManagerForClass(Author::class);
         parent::__construct($registry, Author::class);
     }
 
-    // /**
-    //  * @return Author[] Returns an array of Author objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function createAuthor(string $name, int $age)
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        if(!$name)
+        {
+            echo "Author's name is empty";
+            die();
+        }
+        $author = new Author();
+        $author->setName($name);
+        $author->setAge($age);
 
-    /*
-    public function findOneBySomeField($value): ?Author
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $this->authorManager->persist($author);
+        $this->authorManager->flush();
     }
-    */
+
+    public function getAuthor(int $id): Author
+    {
+        $author = $this->find($id);
+
+        if(!$author)
+        {
+            echo "No author found for id $id";
+            die();
+        }
+        
+        return $author;
+    }
+
+    public function deleteAuthor(int $id)
+    {
+        $author = $this->getAuthor($id);
+        $this->authorManager->remove($author);
+        $this->authorManager->flush();
+    }
 }

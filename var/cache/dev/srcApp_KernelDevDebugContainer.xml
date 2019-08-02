@@ -208,48 +208,56 @@
     <service id="service_container" class="Symfony\Component\DependencyInjection\ContainerInterface" public="true" synthetic="true"/>
     <service id="App\Command\AuthorAddCommand" class="App\Command\AuthorAddCommand" autowire="true" autoconfigure="true">
       <tag name="console.command"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setName">
         <argument>author:add</argument>
       </call>
     </service>
     <service id="App\Command\AuthorDeleteCommand" class="App\Command\AuthorDeleteCommand" autowire="true" autoconfigure="true">
       <tag name="console.command"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setName">
         <argument>author:delete</argument>
       </call>
     </service>
     <service id="App\Command\AuthorListCommand" class="App\Command\AuthorListCommand" autowire="true" autoconfigure="true">
       <tag name="console.command"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setName">
         <argument>author:list</argument>
       </call>
     </service>
     <service id="App\Command\BookAddCommand" class="App\Command\BookAddCommand" autowire="true" autoconfigure="true">
       <tag name="console.command"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setName">
         <argument>book:add</argument>
       </call>
     </service>
     <service id="App\Command\BookAttachCommand" class="App\Command\BookAttachCommand" autowire="true" autoconfigure="true">
       <tag name="console.command"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setName">
         <argument>book:attach</argument>
       </call>
     </service>
     <service id="App\Command\BookDeleteCommand" class="App\Command\BookDeleteCommand" autowire="true" autoconfigure="true">
       <tag name="console.command"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setName">
         <argument>book:delete</argument>
       </call>
     </service>
     <service id="App\Command\BookDetachCommand" class="App\Command\BookDetachCommand" autowire="true" autoconfigure="true">
       <tag name="console.command"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setName">
         <argument>book:detach</argument>
       </call>
     </service>
     <service id="App\Command\BookListCommand" class="App\Command\BookListCommand" autowire="true" autoconfigure="true">
       <tag name="console.command"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setName">
         <argument>book:list</argument>
       </call>
